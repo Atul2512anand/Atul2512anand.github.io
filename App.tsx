@@ -1,66 +1,65 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import SkillsExperience from './components/SkillsExperience';
+import Proof from './components/Proof';
+import About from './components/About';
+import Experience from './components/Experience';
 import Projects from './components/Projects';
-import Certifications from './components/Certifications';
+import Skills from './components/Skills';
 import Tools from './components/Tools';
+import Education from './components/Education';
+import Certifications from './components/Certifications';
 import Contact from './components/Contact';
-import CursorEffect from './components/CursorEffect';
-import { PROFILE } from './constants';
-import { ArrowUp } from 'lucide-react';
+import Footer from './components/Footer';
 
-const App: React.FC = () => {
-  const [showScrollTop, setShowScrollTop] = useState(false);
-
+const App = () => {
   useEffect(() => {
-    const onScroll = () => setShowScrollTop(window.scrollY > 600);
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+    const elements = Array.from(document.querySelectorAll<HTMLElement>('[data-reveal]'));
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (reduceMotion || !('IntersectionObserver' in window)) {
+      elements.forEach((element) => element.classList.add('is-inview'));
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-inview');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -8% 0px' },
+    );
+
+    elements.forEach((element) => observer.observe(element));
+    return () => observer.disconnect();
   }, []);
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  const syncedAt = new Date(PROFILE.generatedAt);
-  const syncedLabel = Number.isNaN(syncedAt.getTime())
-    ? ''
-    : syncedAt.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
-
   return (
-    <div className="min-h-screen bg-white text-slate-900 font-sans relative">
-      <CursorEffect />
+    <div className="site" id="top">
+      <a className="skip-link" href="#main">
+        Skip to content
+      </a>
+
       <Navbar />
-      
-      <main>
+
+      <main id="main">
         <Hero />
-        <SkillsExperience />
+        <Proof />
+        <About />
+        <Experience />
         <Projects />
-        <Certifications />
+        <Skills />
         <Tools />
+        <Education />
+        <Certifications />
         <Contact />
       </main>
 
-      <footer className="bg-gray-50 py-8 text-center text-gray-500 text-sm border-t border-gray-200">
-        <p>&copy; {new Date().getFullYear()} {PROFILE.meta.name}. All rights reserved.</p>
-        {syncedLabel && (
-          <p className="mt-2 text-xs text-gray-400">
-            Content auto-synced from resume · {syncedLabel}
-          </p>
-        )}
-      </footer>
-
-      {showScrollTop && (
-        <button
-          onClick={scrollToTop}
-          className="fixed bottom-8 right-8 p-3 bg-primary text-white rounded-lg shadow-lg hover:bg-indigo-700 transition-all hover:-translate-y-1 z-40 animate-fadeIn"
-          aria-label="Scroll to top"
-        >
-          <ArrowUp size={24} />
-        </button>
-      )}
+      <Footer />
     </div>
   );
 };

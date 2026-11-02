@@ -1,125 +1,106 @@
-import React, { useState, useEffect } from 'react';
-import { NAV_LINKS, PROFILE } from '../constants';
+import { useEffect, useState } from 'react';
 import { Menu, X } from 'lucide-react';
+import { NAV_LINKS, PROFILE, RESUME_URL } from '../constants';
+import Socials from './Socials';
 
-const Navbar: React.FC = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+const Navbar = () => {
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+    document.body.style.overflow = open ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+  }, [open]);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setOpen(false);
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [open]);
+
+  useEffect(() => {
+    const desktop = window.matchMedia('(min-width: 901px)');
+    const onChange = () => {
+      if (desktop.matches) setOpen(false);
+    };
+    desktop.addEventListener('change', onChange);
+    return () => desktop.removeEventListener('change', onChange);
   }, []);
 
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault();
-    setIsOpen(false);
-    
-    const targetId = href.replace('#', '');
-    const element = document.getElementById(targetId);
-    
-    if (element) {
-      // Use scrollIntoView with options, supported by scroll-padding-top in CSS
-      element.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start',
-      });
-      
-      // Update URL hash without jumping
-      window.history.pushState(null, '', href);
-    }
-  };
-
-  const leftLinks = NAV_LINKS.slice(0, 3);
-  const rightLinks = NAV_LINKS.slice(3);
-
   return (
-    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white/95 backdrop-blur-sm shadow-sm' : 'bg-transparent'}`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center md:justify-center relative h-20">
-          
-          {/* Mobile Menu Button */}
-          <div className="md:hidden absolute left-0">
-            <button onClick={() => setIsOpen(!isOpen)} aria-label="Toggle navigation" className="text-gray-800 focus:outline-none p-2 bg-white/50 rounded-md">
-              {isOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-          </div>
+    <header className="nav">
+      <div className="container nav-inner">
+        <a className="brand" href="#top" aria-label="Atul Anand — back to top">
+          <span className="brand-mark" aria-hidden="true">
+            A
+          </span>
+          <span className="brand-name">{PROFILE.meta.name}</span>
+        </a>
 
-          {/* Desktop Navigation - Left */}
-          <div className="hidden md:flex space-x-8 items-center">
-            {leftLinks.map((link) => (
-              <a 
-                key={link.name} 
+        <nav className="nav-links" aria-label="Primary navigation">
+          {NAV_LINKS.map((link) => (
+            <a key={link.href} className="nav-link" href={link.href}>
+              {link.name}
+            </a>
+          ))}
+        </nav>
+
+        <div className="nav-actions">
+          <a
+            className="nav-cta"
+            href={RESUME_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Resume <span aria-hidden="true">↗</span>
+          </a>
+          <button
+            className="menu-button"
+            type="button"
+            aria-label={open ? 'Close menu' : 'Open menu'}
+            aria-expanded={open}
+            aria-controls="mobile-navigation"
+            onClick={() => setOpen((value) => !value)}
+          >
+            {open ? <X size={20} aria-hidden="true" /> : <Menu size={20} aria-hidden="true" />}
+          </button>
+        </div>
+      </div>
+
+      {open && (
+        <div className="mobile-menu" id="mobile-navigation">
+          <nav className="mobile-nav" aria-label="Mobile navigation">
+            {NAV_LINKS.map((link, index) => (
+              <a
+                key={link.href}
+                className="mobile-link"
                 href={link.href}
-                onClick={(e) => handleNavClick(e, link.href)}
-                className="text-gray-700 hover:text-primary font-medium transition-colors text-sm uppercase tracking-wide cursor-pointer"
+                onClick={() => setOpen(false)}
               >
+                <span className="mono">0{index + 1}</span>
                 {link.name}
+                <span aria-hidden="true">↘</span>
               </a>
             ))}
-          </div>
-
-          {/* Center Name Block - Yellow Box */}
-          <div className="hidden md:flex mx-10 h-full items-center">
-             <div className="bg-secondary h-24 px-8 flex items-center justify-center shadow-md transform translate-y-2 transition-transform hover:translate-y-3">
-                <a 
-                  href="#about" 
-                  onClick={(e) => handleNavClick(e, '#about')}
-                  className="text-2xl font-bold text-indigo-900 tracking-tight whitespace-nowrap cursor-pointer"
-                >
-                  {PROFILE.meta.name}
-                </a>
-             </div>
-          </div>
-
-          {/* Desktop Navigation - Right */}
-          <div className="hidden md:flex space-x-8 items-center">
-            {rightLinks.map((link) => (
-              <a 
-                key={link.name} 
-                href={link.href} 
-                onClick={(e) => handleNavClick(e, link.href)}
-                className="text-gray-700 hover:text-primary font-medium transition-colors text-sm uppercase tracking-wide cursor-pointer"
-              >
-                {link.name}
-              </a>
-            ))}
-          </div>
-
-          {/* Mobile Name */}
-          <div className="md:hidden ml-auto">
-             <a 
-               href="#about"
-               onClick={(e) => handleNavClick(e, '#about')}
-               className="font-bold text-xl text-indigo-900 bg-secondary px-4 py-2 rounded-sm shadow-sm cursor-pointer"
-             >
-              {PROFILE.meta.name}
-             </a>
+          </nav>
+          <div className="mobile-menu-foot">
+            <a
+              className="pill pill--dark"
+              href={RESUME_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              View resume <span aria-hidden="true">↗</span>
+            </a>
+            <Socials />
           </div>
         </div>
-
-        {/* Mobile Menu Dropdown */}
-        {isOpen && (
-          <div className="md:hidden absolute top-full left-0 w-full bg-white shadow-lg border-t border-gray-100 animate-fadeIn">
-            <div className="flex flex-col py-4 px-6 space-y-4">
-              {NAV_LINKS.map((link) => (
-                <a 
-                  key={link.name} 
-                  href={link.href} 
-                  onClick={(e) => handleNavClick(e, link.href)}
-                  className="text-gray-600 hover:text-primary font-medium text-lg border-b border-gray-50 pb-2"
-                >
-                  {link.name}
-                </a>
-              ))}
-            </div>
-          </div>
-        )}
-      </div>
-    </nav>
+      )}
+    </header>
   );
 };
 

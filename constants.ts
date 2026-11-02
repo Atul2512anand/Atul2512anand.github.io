@@ -1,36 +1,5 @@
 import profileData from './data/profile.json';
 import type { Profile } from './types';
-import {
-  Activity,
-  Atom,
-  Blocks,
-  Bot,
-  Box,
-  Braces,
-  BrainCircuit,
-  Cloud,
-  Code,
-  Code2,
-  Coffee,
-  Database,
-  FileCode2,
-  Gem,
-  GitBranch,
-  Github,
-  Globe,
-  Layers,
-  LineChart,
-  Link,
-  Link2,
-  ScanFace,
-  Server,
-  Sigma,
-  Table2,
-  Terminal,
-  TrendingUp,
-  Zap,
-  type LucideIcon,
-} from 'lucide-react';
 
 export const PROFILE = profileData as unknown as Profile;
 
@@ -47,14 +16,14 @@ export const assetUrl = (path: string): string => {
 
 export const NAV_LINKS = [
   { name: 'About', href: '#about' },
-  { name: 'Skills', href: '#skills' },
-  { name: 'Projects', href: '#projects' },
-  { name: 'Certifications', href: '#certifications' },
-  { name: 'Tools', href: '#tools' },
+  { name: 'Experience', href: '#experience' },
+  { name: 'Work', href: '#projects' },
+  { name: 'Toolkit', href: '#skills' },
   { name: 'Contact', href: '#contact' },
 ];
 
 export const PROFILE_IMAGE_URL = assetUrl(PROFILE.meta.profileImage);
+export const CUTOUT_IMAGE_URL = assetUrl('atul-cutout.png');
 export const RESUME_URL = assetUrl(PROFILE.meta.resumeUrl);
 
 export const EXPERIENCES = PROFILE.experiences;
@@ -68,45 +37,24 @@ export const ACHIEVEMENTS = PROFILE.achievements;
 export const SCHOLASTIC = PROFILE.scholastic;
 export const STATS = PROFILE.stats;
 
-const TOOL_ICON_MAP: Record<string, LucideIcon> = {
-  Python: Code,
-  Java: Coffee,
-  'C++': Braces,
-  SQL: Database,
-  PostgreSQL: Database,
-  JavaScript: Braces,
-  'HTML/CSS': Globe,
-  Flask: Server,
-  FastAPI: Zap,
-  React: Atom,
-  OpenCV: ScanFace,
-  Pandas: Table2,
-  NumPy: Sigma,
-  Matplotlib: LineChart,
-  'Scikit-learn': BrainCircuit,
-  XGBoost: TrendingUp,
-  KNN: Activity,
-  SVM: Activity,
-  'Logistic Regression': Activity,
-  'Random Forests': Activity,
-  Solidity: FileCode2,
-  Ethereum: Gem,
-  'Ethers.js': Link2,
-  Azure: Cloud,
-  Git: GitBranch,
-  GitHub: Github,
-  Docker: Box,
-  Nginx: Server,
-  'VS Code': Code2,
-  PyCharm: Terminal,
-  Blockchain: Blocks,
-  'Agentic AI': Bot,
-  LangChain: Link,
-  DeepSeek: BrainCircuit,
-  Networking: Layers,
+const SHORT_COMPANY: Record<string, string> = {
+  'EmergeSmart Health (UAE)': 'EmergeSmart',
+  'Indian Institute of Technology (IIT) BHU': 'IIT (BHU)',
+  'Vodafone Intelligent Solutions': 'Vodafone',
+  'Centre of Excellence in Cybersecurity, NFSU': 'CoE-CS',
 };
 
-export const TOOL_ICONS = PROFILE.tools.map((name) => ({
-  name,
-  icon: TOOL_ICON_MAP[name] ?? Code,
-}));
+const leadInstitution = EDUCATION[0]?.institution
+  ? EDUCATION[0].institution.includes('Forensic')
+    ? 'NFSU'
+    : EDUCATION[0].institution.split(',')[0]
+  : '';
+
+/** A typographic stand-in for the logo strip on the reference site. */
+export const PROOF_LOGOS = Array.from(
+  new Set(
+    [leadInstitution, ...EXPERIENCES.map((item) => SHORT_COMPANY[item.company] ?? item.company)]
+      .map((item) => item.trim())
+      .filter(Boolean),
+  ),
+);

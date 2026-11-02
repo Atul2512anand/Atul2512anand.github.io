@@ -161,7 +161,9 @@ root.
 ```text
 public/
   resume.pdf                ← canonical resume (also the download button)
-  profile image.png
+  profile image.png         ← original portrait; fallback for the About section
+  atul-cutout.png           ← transparent portrait used on the About band
+  og.jpg                    ← 1200×630 social preview card
 data/
   profile.json              ← generated; do not edit by hand
   linkedin.json             ← normalized public LinkedIn snapshot (optional)
@@ -171,9 +173,27 @@ scripts/
 .github/workflows/
   sync-and-deploy.yml       ← sync, commit, build, deploy to Pages
 components/                 ← React UI
+index.css                   ← custom design system (no Tailwind)
 constants.ts                ← loads profile.json and maps tool icons
 types.ts                    ← profile schema
 ```
+
+## Design notes
+
+The site is a bold editorial layout built on a warm paper background, oversized
+DM Sans type, DM Mono labels, sharp colour bands and a cutout portrait. There is
+no Tailwind build step or CDN: everything lives in `index.css`.
+
+- Fonts are self-hosted through `@fontsource/dm-sans` and `@fontsource/dm-mono`
+  so there is no external Google Fonts request.
+- `public/atul-cutout.png` is the transparent portrait on the yellow About band.
+  If it ever fails to load, the component falls back to `profile image.png`.
+  Rebuild it from the original portrait with
+  `python scripts/make_cutout.py` (requires Pillow).
+- Social sharing uses `public/og.jpg`, a 1200×630 crop of the hero. Regenerate it
+  if the hero copy or portrait changes.
+- Motion is limited to IntersectionObserver reveals and one CSS marquee, and is
+  disabled when the visitor prefers reduced motion.
 
 ## If the parser misses something
 
@@ -193,4 +213,5 @@ projects, so a broken parse will not silently wipe the site.
 
 ## Tech stack
 
-React 19, Vite 6, TypeScript, Tailwind (CDN), lucide-react, PyMuPDF.
+React 19, Vite 6, TypeScript, custom CSS, self-hosted DM Sans/DM Mono
+(`@fontsource`), lucide-react, PyMuPDF.
