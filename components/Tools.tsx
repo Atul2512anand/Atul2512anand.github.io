@@ -10,6 +10,7 @@ const Tools: React.FC = () => {
       <div className="text-center mb-16">
         <h2 className="text-4xl font-bold text-gray-900">Tools & Technologies</h2>
         <div className="w-16 h-1 bg-secondary mx-auto mt-4"></div>
+        <p className="mt-4 text-sm text-gray-500">Pulled from my resume and project stacks.</p>
       </div>
 
       <div className="relative w-full">

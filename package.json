@@ -5,12 +5,15 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:fresh": "python scripts/sync_content.py && vite",
+    "sync": "python scripts/sync_content.py",
+    "sync:check": "python scripts/sync_content.py --check",
     "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {
-    "react": "^19.2.0",
     "lucide-react": "^0.554.0",
+    "react": "^19.2.0",
     "react-dom": "^19.2.0"
   },
   "devDependencies": {

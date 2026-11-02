@@ -1,0 +1,43 @@
+{
+  "_comment": "Hand-maintained details that are not on a resume. The sync script preserves this file; edit it whenever your links, photo, summary or project URLs change.",
+  "tagline": "Cybersecurity & AI Engineer",
+  "summary": "I build secure, intelligent systems — from blockchain supply-chain traceability to predictive-maintenance agents. B.Tech-M.Tech Cybersecurity student at NFSU with hands-on experience across AI/ML, OSINT, cloud and OT security.",
+  "location": "Dharwad, Karnataka, India",
+  "profileImage": "profile image.png",
+  "resumeUrl": "resume.pdf",
+  "links": {
+    "github": "https://github.com/Atul2512anand",
+    "linkedin": "https://www.linkedin.com/in/atul-anand-53007a215/",
+    "x": "https://x.com/atul_sci",
+    "instagram": "https://www.instagram.com/atul25anand/"
+  },
+  "focusAreas": [
+    "AI/ML",
+    "Cybersecurity",
+    "Blockchain",
+    "Cloud",
+    "OT/SCADA",
+    "Data Analytics"
+  ],
+  "projectLinks": {
+    "AgriSupplyChain Blockchain DApp (AgriChain)": "https://github.com/Atul2512anand/Agrichain",
+    "Autonomous Predictive Bike Maintenance System": "https://github.com/Atul2512anand/Autonomous-predictive-maintenance",
+    "Face Recognition Attendance System": "https://github.com/Atul2512anand/Face-Recognition-Attendance-System"
+  },
+  "certificationIssuers": [
+    "National Forensic Sciences University",
+    "NFSU",
+    "IIT BHU",
+    "EmergeSmart Health",
+    "Zoho",
+    "Amazon Web Services",
+    "AWS",
+    "Google",
+    "Microsoft",
+    "Cisco Networking Academy",
+    "Security Blue Team",
+    "Securiti",
+    "Udemy",
+    "GeeksforGeeks"
+  ]
+}

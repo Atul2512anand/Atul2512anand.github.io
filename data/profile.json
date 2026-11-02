@@ -1,0 +1,305 @@
+{
+  "meta": {
+    "name": "Atul Anand",
+    "headline": "B.Tech-M.Tech Computer Science (Cybersecurity)",
+    "tagline": "Cybersecurity & AI Engineer",
+    "summary": "I build secure, intelligent systems — from blockchain supply-chain traceability to predictive-maintenance agents. B.Tech-M.Tech Cybersecurity student at NFSU with hands-on experience across AI/ML, OSINT, cloud and OT security.",
+    "location": "Dharwad, Karnataka, India",
+    "email": "atul.btmtcs10232807@nfsu.ac.in",
+    "phone": "+91 8002424420",
+    "profileImage": "profile image.png",
+    "resumeUrl": "resume.pdf",
+    "links": {
+      "github": "https://github.com/Atul2512anand",
+      "linkedin": "https://www.linkedin.com/in/atul-anand-53007a215/",
+      "x": "https://x.com/atul_sci",
+      "instagram": "https://www.instagram.com/atul25anand/"
+    },
+    "sources": {
+      "resume": "public/resume.pdf",
+      "linkedin": false
+    }
+  },
+  "stats": [
+    {
+      "value": "8.80",
+      "label": "GPA at NFSU"
+    },
+    {
+      "value": "4",
+      "label": "Internships & training"
+    },
+    {
+      "value": "3",
+      "label": "Projects"
+    }
+  ],
+  "experiences": [
+    {
+      "id": 1,
+      "role": "Cybersecurity & Tech Analyst Intern",
+      "company": "EmergeSmart Health (UAE)",
+      "period": "Jul 2025 – Feb 2026",
+      "description": [
+        "Built a ZOHO CRM automated workflow and launched a WordPress Webzine for health-tech outreach.",
+        "Conducted OSINT investigation across 50+ data points, improving compliance visibility for UAE operations.",
+        "Assessed resilience against HTTP flood attacks, delivering 5+ actionable security recommendations."
+      ]
+    },
+    {
+      "id": 2,
+      "role": "Research Intern under Dr. Priya Ranjan Muduli",
+      "company": "Indian Institute of Technology (IIT) BHU",
+      "period": "May 2025 – Jul 2025",
+      "description": [
+        "Applied ML/DL models on 4 datasets achieving 85–95% accuracy across varied problem domains.",
+        "Performed data cleaning & EDA on 10k+ records, improving performance by 12%.",
+        "Reviewed 3 Quantum ML papers bridging classical and quantum methods."
+      ]
+    },
+    {
+      "id": 3,
+      "role": "Data Analytics Intern, Remote",
+      "company": "Vodafone Intelligent Solutions",
+      "period": "Oct 2024 – Nov 2024",
+      "description": [
+        "Analyzed 9,994 retail entries, improving sales insights by 20%.",
+        "Processed 5k+ health records to uncover demographic illness trends.",
+        "Built ML attrition models achieving 78% accuracy."
+      ]
+    },
+    {
+      "id": 4,
+      "role": "CoE-CS OT/IT Security Trainee",
+      "company": "Centre of Excellence in Cybersecurity, NFSU",
+      "period": "Jul 2025",
+      "description": [
+        "Hands-on training with PLCs, OT/IT security concepts, and simulated attack-mitigation exercises.",
+        "Learned SCADA systems security, ISO standards, incident response and SOC analyst workflows via labs."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "id": 1,
+      "degree": "B.Tech-M.Tech, CS (Cybersecurity)",
+      "institution": "National Forensic Sciences University, Dharwad",
+      "period": "2023–Present",
+      "score": "8.80/10",
+      "label": "Graduation"
+    },
+    {
+      "id": 2,
+      "degree": "CBSE (XII)",
+      "institution": "Central Board of Secondary Education",
+      "period": "2022",
+      "score": "92%",
+      "label": "Intermediate/+2"
+    },
+    {
+      "id": 3,
+      "degree": "CBSE (X)",
+      "institution": "Central Board of Secondary Education",
+      "period": "2020",
+      "score": "98%",
+      "label": "Matriculation"
+    }
+  ],
+  "skillGroups": [
+    {
+      "category": "Languages",
+      "items": [
+        "Python",
+        "Java",
+        "C/C++",
+        "SQL (PostgreSQL)",
+        "JavaScript",
+        "HTML/CSS"
+      ]
+    },
+    {
+      "category": "Frameworks & Libraries",
+      "items": [
+        "Flask",
+        "FastAPI",
+        "React",
+        "OpenCV",
+        "Pandas",
+        "NumPy",
+        "Matplotlib"
+      ]
+    },
+    {
+      "category": "AI / ML",
+      "items": [
+        "Scikit-learn",
+        "XGBoost",
+        "KNN",
+        "SVM",
+        "Logistic Regression",
+        "Random Forests"
+      ]
+    },
+    {
+      "category": "Blockchain & Cloud",
+      "items": [
+        "Solidity",
+        "Ethereum",
+        "Ethers.js",
+        "Microsoft Azure (VM)"
+      ]
+    },
+    {
+      "category": "Tools",
+      "items": [
+        "Git",
+        "GitHub",
+        "Docker",
+        "Nginx",
+        "VS Code",
+        "PyCharm"
+      ]
+    }
+  ],
+  "focusAreas": [
+    "AI/ML",
+    "Cybersecurity",
+    "Blockchain",
+    "Cloud",
+    "OT/SCADA",
+    "Data Analytics"
+  ],
+  "projects": [
+    {
+      "id": 1,
+      "title": "AgriSupplyChain Blockchain DApp (AgriChain)",
+      "year": "2025",
+      "description": "Immutable agricultural traceability: Designed and deployed a public blockchain dApp enabling end-to-end, tamper-proof tracking of produce lifecycle events. Role-based on-chain governance: Implemented farmer-distributor-retailer access control with verifiable transaction history and live public auditing.",
+      "tools": [
+        "Blockchain",
+        "Solidity",
+        "Ethereum",
+        "Ethers.js"
+      ],
+      "image": "",
+      "link": "https://github.com/Atul2512anand/Agrichain"
+    },
+    {
+      "id": 2,
+      "title": "Autonomous Predictive Bike Maintenance System",
+      "year": "2025",
+      "description": "Agentic AI predictive maintenance: Trained an XGBoost model on the AI4I 2020 dataset to detect potential vehicle component failures. Smart service automation: Integrated LangChain + DeepSeek with maps, mechanic discovery, auto service scheduling, and real-time voice assistance.",
+      "tools": [
+        "Agentic AI",
+        "XGBoost",
+        "LangChain",
+        "DeepSeek"
+      ],
+      "image": "",
+      "link": "https://github.com/Atul2512anand/Autonomous-predictive-maintenance"
+    },
+    {
+      "id": 3,
+      "title": "Face Recognition Attendance System",
+      "year": "2025",
+      "description": "Real-time automated attendance: Built a live face-recognition system that detects, identifies, and logs attendance with timestamps and confidence scores. Cloud-deployed admin workflow: Implemented an admin panel for user management, model training, and CSV export, deployed 24/7 on an Azure VM.",
+      "tools": [
+        "OpenCV",
+        "Flask",
+        "Microsoft Azure VM"
+      ],
+      "image": "",
+      "link": "https://github.com/Atul2512anand/Face-Recognition-Attendance-System"
+    }
+  ],
+  "certifications": [
+    {
+      "id": 1,
+      "title": "CoE-CS OT/IT Security Training",
+      "issuer": "NFSU",
+      "date": "Jul 2025",
+      "description": "PLCs, SCADA, SOC, ISO standards",
+      "link": ""
+    },
+    {
+      "id": 2,
+      "title": "Zoho CRM & WordPress automation",
+      "issuer": "EmergeSmart Health",
+      "date": "2025-26",
+      "description": "",
+      "link": ""
+    },
+    {
+      "id": 3,
+      "title": "Quantum ML literature review",
+      "issuer": "IIT BHU",
+      "date": "May-Jul 2025",
+      "description": "",
+      "link": ""
+    }
+  ],
+  "tools": [
+    "Python",
+    "Java",
+    "C++",
+    "SQL",
+    "JavaScript",
+    "HTML/CSS",
+    "Flask",
+    "FastAPI",
+    "React",
+    "OpenCV",
+    "Pandas",
+    "NumPy",
+    "Matplotlib",
+    "Scikit-learn",
+    "XGBoost",
+    "KNN",
+    "SVM",
+    "Logistic Regression",
+    "Random Forests",
+    "Solidity",
+    "Ethereum",
+    "Ethers.js",
+    "Azure",
+    "Git",
+    "GitHub",
+    "Docker",
+    "Nginx",
+    "VS Code",
+    "PyCharm",
+    "Blockchain",
+    "Agentic AI",
+    "LangChain",
+    "DeepSeek"
+  ],
+  "achievements": [
+    "Hands-on SOC Analyst workflow simulation and ISO 27001 incident response labs at CoE-CS, NFSU.",
+    "Built 3 deployed full-stack dApps with end-to-end blockchain + AI integration (AgriChain, PMS, Attendance).",
+    "Demonstrated cross-domain impact: healthcare OSINT, retail analytics (9,994 rows), and OT/SCADA security."
+  ],
+  "scholastic": [
+    "Secured 8.80/10 GPA in B.Tech-M.Tech Computer Science (Cybersecurity) at NFSU, an Institute of National Importance under MHA, Govt. of India.",
+    "Secured 92% in Class XII (2022) and 98% in Class X (2020), CBSE — among top percentile nationally.",
+    "Awarded Top Performer in CoE-CS OT/IT Security hands-on assessment on PLCs, SCADA and SOC workflows (Jul 2025)."
+  ],
+  "courses": [
+    "Introduction to Computer Science",
+    "Data Structures and Algorithms",
+    "Computer Architecture",
+    "Operating Systems",
+    "Computer Networks",
+    "Cryptography & Network Security",
+    "Digital Forensics*",
+    "Cyber Laws & Ethics*",
+    "Machine Learning",
+    "Blockchain Technology*",
+    "Cloud Computing",
+    "Database Management Systems",
+    "OT/IT & SCADA Security*",
+    "AI for Cybersecurity*",
+    "Incident Response",
+    "SOC Operations"
+  ],
+  "generatedAt": "2026-11-02T16:49:09+00:00"
+}

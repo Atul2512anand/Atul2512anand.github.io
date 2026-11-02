@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { NAV_LINKS } from '../constants';
+import { NAV_LINKS, PROFILE } from '../constants';
 import { Menu, X } from 'lucide-react';
 
 const Navbar: React.FC = () => {
@@ -43,7 +43,7 @@ const Navbar: React.FC = () => {
           
           {/* Mobile Menu Button */}
           <div className="md:hidden absolute left-0">
-            <button onClick={() => setIsOpen(!isOpen)} className="text-gray-800 focus:outline-none p-2 bg-white/50 rounded-md">
+            <button onClick={() => setIsOpen(!isOpen)} aria-label="Toggle navigation" className="text-gray-800 focus:outline-none p-2 bg-white/50 rounded-md">
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
@@ -70,7 +70,7 @@ const Navbar: React.FC = () => {
                   onClick={(e) => handleNavClick(e, '#about')}
                   className="text-2xl font-bold text-indigo-900 tracking-tight whitespace-nowrap cursor-pointer"
                 >
-                  Atul Anand
+                  {PROFILE.meta.name}
                 </a>
              </div>
           </div>
@@ -96,7 +96,7 @@ const Navbar: React.FC = () => {
                onClick={(e) => handleNavClick(e, '#about')}
                className="font-bold text-xl text-indigo-900 bg-secondary px-4 py-2 rounded-sm shadow-sm cursor-pointer"
              >
-              Atul Anand
+              {PROFILE.meta.name}
              </a>
           </div>
         </div>

@@ -1,0 +1,80 @@
+name: Sync content and deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install resume parser
+        run: python -m pip install -r requirements.txt
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Sync profile from resume
+        run: npm run sync
+
+      - name: Commit regenerated profile
+        continue-on-error: true
+        run: |
+          if git diff --quiet -- data/profile.json; then
+            echo "Profile is already up to date."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/profile.json
+          git commit -m "chore: sync portfolio content from resume [skip ci]"
+          git push origin HEAD:${{ github.ref_name }}
+
+      - name: Build site
+        run: npm run build
+        env:
+          # Set the repository variable VITE_BASE_PATH=/ if you use a custom
+          # domain (otherwise the workflow uses /<repository-name>/).
+          VITE_BASE_PATH: ${{ vars.VITE_BASE_PATH }}
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload site
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

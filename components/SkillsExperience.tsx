@@ -1,5 +1,13 @@
 import React, { useState } from 'react';
-import { EXPERIENCES, EDUCATION, SKILLS } from '../constants';
+import { ArrowUpRight, Sparkles } from 'lucide-react';
+import {
+  ACHIEVEMENTS,
+  COURSES,
+  EDUCATION,
+  EXPERIENCES,
+  FOCUS_AREAS,
+  SKILL_GROUPS,
+} from '../constants';
 
 const SkillsExperience: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'experience' | 'education'>('experience');
@@ -11,8 +19,8 @@ const SkillsExperience: React.FC = () => {
         <div className="text-left mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Skills & Experience</h2>
           <p className="text-gray-600 text-lg max-w-3xl leading-relaxed">
-            Over 2 years of academic and internship experience building end-to-end AI applications and securing digital assets.
-            From Machine Learning models to Offensive Security, leveraging Python, Cloud platforms, and best practices in Engineering.
+            A snapshot of my technical toolkit and the roles behind it, generated directly from my
+            resume so it stays current.
           </p>
         </div>
 
@@ -25,31 +33,50 @@ const SkillsExperience: React.FC = () => {
               My Skills
             </h3>
             
-            <div className="space-y-8">
-              {SKILLS.map((skill) => (
-                <div key={skill.name} className="group">
-                  <div className="flex justify-between mb-2">
-                    <span className="font-bold text-gray-700 group-hover:text-primary transition-colors">{skill.name}</span>
-                    <span className="font-bold text-gray-900">{skill.level}%</span>
-                  </div>
-                  <div className="w-full bg-gray-200 rounded-full h-2.5 overflow-hidden">
-                    <div 
-                      className={`h-2.5 rounded-full ${skill.color} transition-all duration-1000 ease-out group-hover:opacity-80`}
-                      style={{ width: `${skill.level}%` }}
-                    ></div>
+            <div className="space-y-6">
+              {SKILL_GROUPS.map((group) => (
+                <div key={group.category}>
+                  <h4 className="mb-3 text-xs font-bold uppercase tracking-[0.18em] text-gray-500">
+                    {group.category}
+                  </h4>
+                  <div className="flex flex-wrap gap-2">
+                    {group.items.map((item) => (
+                      <span
+                        key={item}
+                        className="rounded-lg border border-gray-200 bg-white px-3 py-1.5 text-sm font-medium text-gray-700 transition-colors hover:border-primary hover:text-primary"
+                      >
+                        {item}
+                      </span>
+                    ))}
                   </div>
                 </div>
               ))}
             </div>
 
-            <div className="mt-12 p-6 bg-white rounded-xl border border-gray-200 shadow-sm">
-              <h4 className="font-bold text-gray-900 mb-2">Focus Areas</h4>
+            <div className="mt-10 p-6 bg-white rounded-xl border border-gray-200 shadow-sm">
+              <h4 className="font-bold text-gray-900 mb-3">Focus Areas</h4>
               <div className="flex flex-wrap gap-2">
-                {['Intrusion Detection', 'Phishing Detection', 'Predictive Models', 'Cloud Security', 'OSINT'].map(tag => (
-                  <span key={tag} className="px-3 py-1 bg-gray-100 text-gray-600 text-sm rounded-full">
+                {FOCUS_AREAS.map((tag) => (
+                  <span key={tag} className="px-3 py-1 bg-indigo-50 text-indigo-700 text-sm font-medium rounded-full">
                     {tag}
                   </span>
                 ))}
+              </div>
+            </div>
+
+            <div className="mt-6 p-6 bg-white rounded-xl border border-gray-200 shadow-sm">
+              <h4 className="font-bold text-gray-900 mb-3">Relevant Coursework</h4>
+              <div className="flex flex-wrap gap-2">
+                {COURSES.map((course) => {
+                  const ongoing = course.endsWith('*');
+                  const label = course.replace(/\*$/, '');
+                  return (
+                    <span key={course} className="rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-600">
+                      {label}
+                      {ongoing && <span className="ml-1 text-secondary" title="Ongoing">•</span>}
+                    </span>
+                  );
+                })}
               </div>
             </div>
           </div>
@@ -87,19 +114,31 @@ const SkillsExperience: React.FC = () => {
                   {EXPERIENCES.map((exp) => (
                     <div key={exp.id} className="flex gap-6 group">
                       <div className="flex flex-col items-center">
-                         <div className="w-12 h-12 rounded-full bg-indigo-50 text-primary flex items-center justify-center font-bold text-xl group-hover:bg-primary group-hover:text-white transition-colors border-2 border-indigo-100">
+                         <div className="w-12 h-12 shrink-0 rounded-full bg-indigo-50 text-primary flex items-center justify-center font-bold text-xl group-hover:bg-primary group-hover:text-white transition-colors border-2 border-indigo-100">
                             {exp.id}
                          </div>
                          <div className="w-0.5 h-full bg-gray-200 my-2 group-last:hidden"></div>
                       </div>
                       <div className="pb-6">
-                        <h4 className="text-xl font-bold text-gray-900 mb-1">{exp.role}</h4>
-                        <div className="text-primary font-medium mb-2">{exp.company} <span className="text-gray-400 mx-2">|</span> <span className="text-gray-500 text-sm">{exp.period}</span></div>
-                        <ul className="list-disc list-outside ml-4 text-gray-600 space-y-2 text-sm leading-relaxed marker:text-secondary">
-                          {exp.description.map((item, i) => (
-                            <li key={i}>{item}</li>
-                          ))}
-                        </ul>
+                        <div className="flex flex-wrap items-center gap-2">
+                          <h4 className="text-xl font-bold text-gray-900">{exp.role}</h4>
+                          {exp.source === 'linkedin' && (
+                            <span className="rounded-full bg-sky-50 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-sky-700">
+                              LinkedIn
+                            </span>
+                          )}
+                        </div>
+                        <div className="text-primary font-medium mb-2">
+                          {exp.company} <span className="text-gray-400 mx-2">|</span>{' '}
+                          <span className="text-gray-500 text-sm">{exp.period}</span>
+                        </div>
+                        {exp.description.length > 0 && (
+                          <ul className="list-disc list-outside ml-4 text-gray-600 space-y-2 text-sm leading-relaxed marker:text-secondary">
+                            {exp.description.map((item, i) => (
+                              <li key={i}>{item}</li>
+                            ))}
+                          </ul>
+                        )}
                       </div>
                     </div>
                   ))}
@@ -109,7 +148,7 @@ const SkillsExperience: React.FC = () => {
                   {EDUCATION.map((edu, index) => (
                     <div key={edu.id} className="flex gap-6 group">
                        <div className="flex flex-col items-center">
-                         <div className="w-12 h-12 rounded-full bg-amber-50 text-secondary flex items-center justify-center font-bold text-xl group-hover:bg-secondary group-hover:text-white transition-colors border-2 border-amber-100">
+                         <div className="w-12 h-12 shrink-0 rounded-full bg-amber-50 text-secondary flex items-center justify-center font-bold text-xl group-hover:bg-secondary group-hover:text-white transition-colors border-2 border-amber-100">
                             {index + 1}
                          </div>
                          <div className="w-0.5 h-full bg-gray-200 my-2 group-last:hidden"></div>
@@ -117,9 +156,13 @@ const SkillsExperience: React.FC = () => {
                       <div>
                         <h4 className="text-xl font-bold text-gray-900 mb-1">{edu.degree}</h4>
                         <div className="text-secondary font-medium mb-2">{edu.institution}</div>
-                        <div className="flex items-center gap-4 text-sm text-gray-500">
+                        <div className="flex flex-wrap items-center gap-3 text-sm text-gray-500">
                           <span className="bg-gray-100 px-2 py-1 rounded">{edu.period}</span>
-                          {edu.score && <span className="font-bold text-gray-700">{edu.score}</span>}
+                          {edu.score && (
+                            <span className="font-bold text-gray-700">
+                              {edu.score.includes('/') ? `GPA: ${edu.score}` : edu.score}
+                            </span>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -127,6 +170,23 @@ const SkillsExperience: React.FC = () => {
                 </div>
               )}
             </div>
+
+            {ACHIEVEMENTS.length > 0 && (
+              <div className="mt-12 rounded-2xl border border-indigo-100 bg-indigo-50/60 p-6">
+                <h4 className="mb-4 flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-indigo-900">
+                  <Sparkles size={16} className="text-secondary" />
+                  Selected Achievements
+                </h4>
+                <ul className="space-y-3">
+                  {ACHIEVEMENTS.map((item) => (
+                    <li key={item} className="flex gap-3 text-sm leading-relaxed text-indigo-950/80">
+                      <ArrowUpRight size={16} className="mt-0.5 shrink-0 text-primary" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
 
         </div>

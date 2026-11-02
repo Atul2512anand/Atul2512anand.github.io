@@ -12,6 +12,10 @@ dist
 dist-ssr
 *.local
 
+# LinkedIn data export — private, never commit or publish this
+data/linkedin-export/
+data/linkedin-export.zip
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -22,3 +26,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Python cache
+__pycache__/
+*.pyc
